@@ -8,6 +8,22 @@ from groq import Groq
 
 load_dotenv()
 
+
+def get_secret(key):
+    value = os.getenv(key)
+    if value:
+        return value
+
+    try:
+        value = st.secrets.get(key)
+        if value:
+            return value
+    except Exception:
+        pass
+
+    return None
+
+
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Echoes | The Memory Lantern",
@@ -266,7 +282,7 @@ Instructions:
 
         with st.spinner("Gathering your memory into words..."):
             try:
-                groq_api_key = os.getenv("GROQ_API_KEY")
+                groq_api_key = get_secret("groq_api_key") or get_secret("GROQ_API_KEY")
 
                 if not groq_api_key:
                     st.error(
@@ -338,7 +354,7 @@ if st.session_state.get("echoes_memory"):
     )
 
     if st.button("♫  Create audio narration", use_container_width=True):
-        api_key = os.getenv("ELEVENLABS_API_KEY")
+        api_key = get_secret("elevenlabs_api_key") or get_secret("ELEVENLABS_API_KEY")
 
         if not api_key:
             st.warning(
