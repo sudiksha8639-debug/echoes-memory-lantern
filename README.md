@@ -1,34 +1,36 @@
-
 # Echoes — The Memory Lantern 🕯️
 
-**Turn meaningful memories into heartfelt keepsakes with AI-generated narration.**
+**Turn meaningful memories into heartfelt keepsakes with AI-generated writing and voice narration.**
 
-Echoes is an AI-powered memory-preservation application that transforms personal memories into warm, reflective written keepsakes. Users can choose a writing style, generate a keepsake using a locally running language model, listen to an audio narration, and download the resulting text.
+Echoes is an AI-powered web application that transforms personal memories into warm, reflective written keepsakes. Choose a writing style, generate a personalized reflection, listen to it through AI-powered narration, and download your keepsake to preserve it.
+
+🔗 **Live Demo:** [Open Echoes](https://the-memory-lantern.streamlit.app/)
 
 ## ✨ Features
 
-- **AI-generated keepsakes:** Transform personal memories into heartfelt written reflections.
-- **Multiple writing styles:** Choose between warm and nostalgic, poetic and reflective, gentle and comforting, or simple and heartfelt.
-- **Audio narration:** Listen to generated keepsakes using ElevenLabs text-to-speech.
-- **Downloadable keepsakes:** Save your generated text for later.
-- **Local AI generation:** Use Ollama with Qwen 2.5 for memory generation on your own machine.
+- **AI-generated keepsakes:** Transform personal memories into thoughtful, reflective writing.
+- **Multiple writing styles:** Choose Warm and Nostalgic, Poetic and Reflective, Gentle and Comforting, or Simple and Heartfelt.
+- **AI voice narration:** Convert generated keepsakes into audio using ElevenLabs Text-to-Speech.
+- **Free browser narration:** Listen using your browser's built-in speech synthesis as an alternative.
+- **Downloadable keepsakes:** Download your generated text and, when available, narrated audio.
+- **Interactive web interface:** Create and experience your keepsakes through a Streamlit application.
 
 ## 🛠️ Tech Stack
 
-- Python
-- Streamlit
-- Ollama
-- Qwen 2.5 (1.5B)
-- ElevenLabs Text-to-Speech
+- **Python** — Application logic
+- **Streamlit** — Web interface
+- **Groq API** — AI-powered memory generation
+- **ElevenLabs API** — Text-to-speech narration
+- **Browser Speech Synthesis API** — Free browser-based narration
+- **python-dotenv** — Local environment configuration
 
 ## 🚀 Run Locally
 
 ### Prerequisites
 
-- Python 3.10 or a compatible version
-- Ollama installed
-- The `qwen2.5:1.5b` model downloaded
-- An ElevenLabs API key for audio narration
+- Python 3.10 or later, preferably Python 3.12
+- A Groq API key
+- An ElevenLabs API key for AI audio narration
 
 ### 1. Clone the repository
 
@@ -39,7 +41,7 @@ cd echoes-memory-lantern
 
 ### 2. Create and activate a virtual environment
 
-On macOS or Linux:
+**macOS/Linux**
 
 ```bash
 python3 -m venv .venv
@@ -49,50 +51,45 @@ source .venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
-pip install streamlit requests python-dotenv elevenlabs
+pip install -r requirements.txt
 ```
 
-### 4. Download the local AI model
-
-```bash
-ollama pull qwen2.5:1.5b
-```
-
-Make sure Ollama is running before launching the application.
-
-### 5. Configure audio narration
+### 4. Configure API keys
 
 Create a `.env` file in the project root:
 
 ```env
-ELEVENLABS_API_KEY=your_api_key_here
+GROQ_API_KEY=your_groq_api_key
+ELEVENLABS_API_KEY=your_elevenlabs_api_key
 ```
 
-Replace `your_api_key_here` with your own ElevenLabs API key. Never commit your real API key to GitHub.
+Replace the placeholder values with your own API keys. Never commit real API keys to GitHub.
 
-### 6. Launch Echoes
+### 5. Launch Echoes
 
 ```bash
 python -m streamlit run app.py
 ```
 
-Open the local URL shown in your terminal, usually `http://localhost:8501`.
+Open the local URL displayed in your terminal, usually `http://localhost:8501`.
 
 ## 🔐 Privacy and Security
 
-- Keep API keys in environment variables rather than source code.
-- The `.env` file is excluded from Git through `.gitignore`.
-- Local AI generation requires Ollama to be running on your machine.
+- API keys should be stored in environment variables or deployment secrets, never in source code.
+- The `.env` file is excluded from version control through `.gitignore`.
+- Memories are sent to the configured AI provider for generation. Avoid entering sensitive personal information unless you are comfortable sharing it with that service.
+- Audio narration availability depends on the configured ElevenLabs account and its available quota.
+- Browser narration provides an alternative when AI audio narration is unavailable.
 
 ## 🌱 Future Improvements
 
-- Deploy a publicly accessible version.
-- Add more keepsake styles and personalization options.
-- Explore additional ways to organize and revisit saved memories.
+- Add an option to organize and revisit saved keepsakes.
+- Explore additional narration voices and personalization options.
+- Introduce optional, privacy-conscious memory storage.
 
 ## 👩‍💻 Author
 
-Created by **Sudiksha Das**.
+**Sudiksha Das**
 
 ---
 
